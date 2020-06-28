@@ -10,7 +10,9 @@ function clearData($dato){
     2 => array('%', "&#37"),
     3 => array('<', '&lt;'),
     4 => array('>', '&gt;'),
-    5 => array("'", '&#8216;'),
+    //5 => array("'", '&#8216;'),
+    5 => array("'", "\'"),
+    6 => array("\\", "\\"),
   );
 
   foreach ($character as $char) {

@@ -113,7 +113,7 @@
                                 <div class="card-footer">
                                   <p class="card-text">
                                     <b>fecha liberacion:</b> <?php echo $modulos->Registro['fecha'] ?> &nbsp;
-                                    <a href="<?php echo $modulos->Registro['ruta'] ?>" class="btn btn-success">Ir</a>
+                                    <a href="<?php echo $modulos->Registro['ruta'] ?>" target="<?php echo $modulos->Registro['nombre'] ?>" class="btn btn-success">Ir</a>
                                   </p>
 
                                 </div>
