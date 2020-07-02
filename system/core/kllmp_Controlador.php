@@ -27,7 +27,7 @@ class kllmp_Controlador
     }
   }
 
-  public function clearData($string)
+  protected function clearData($string)
   {
     $string = trim($string);
 
@@ -42,7 +42,7 @@ class kllmp_Controlador
       array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
       $string
     );
-  
+
     $string = str_replace(
       array('í', 'ì', 'ï', 'î', 'Í', 'Ì', 'Ï', 'Î'),
       array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
