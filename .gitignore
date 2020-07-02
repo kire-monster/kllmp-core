@@ -1,6 +1,3 @@
 assets/
-controllers/Admin.php
-controllers/Login.php
-controllers/Admin.php
-controllers/Notas.php
+controllers/
 views/front/

@@ -9,7 +9,7 @@ class Home extends kllmp_Controlador {
   }
 
   public function index()  {
-    $this->vista("home");
+    $this->vista("front/home/inicio");
   }
 
 }
