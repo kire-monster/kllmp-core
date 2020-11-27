@@ -57,7 +57,7 @@ class Conexion
 		{
 			case 'MySQL':
 				//@mysqli_connect(servidor, usuario, contraseña, nombre_bd , puerto)
-				$this->Con = @mysqli_connect('localhost', 'kllmporg', '131230001Eñ.', $this->DBName,3306);
+				$this->Con = @mysqli_connect('localhost', 'test', 'test01.', $this->DBName,3306);
 				break;
 			case 'PgSQL':
 				$this->DBName = $this->DBName!=""? " dbname=" . $this->DBName: null;
