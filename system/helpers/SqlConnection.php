@@ -1,21 +1,22 @@
-<?php
+<?php 
+
 /**
  * @version 1.0.7
  * @author Erik Carrillo
  */
 
-class DB_Model
+class SqlConnection
 {
-	protected $Con;
+	public $Con;
 	private $Query;
-	protected $Reg;
+	public $Reg;
 
 	private $MDB;
 	private $DBName;
 
-	protected $ErrorDB;
-	protected $NumRows=0;
-
+	public $ErrorDB;
+	public $NumRows=0;
+	
 	function __construct($var1='MySQL',$var2='')
 	{
 		$this->MDB = $var1;
@@ -25,18 +26,16 @@ class DB_Model
 
 	private function Inicializar()
 	{
-		switch ($this->MDB)
+		switch ($this->MDB) 
 		{
 			case 'MySQL':
-				//@mysqli_connect(servidor, usuario, contraseña, nombre_bd , puerto)
-				$this->Con = @mysqli_connect('localhost', 'test', 'test01', $this->DBName, 3306);
+				$this->Con = @mysqli_connect('localhost', 'kllmporg', '131230001Eñ.', $this->DBName,3306);
 				break;
 			case 'PgSQL':
 				$this->DBName = $this->DBName!=""? " dbname=" . $this->DBName: null;
-				$this->Con = @pg_connect("host=localhost user=postgres password=test ".$this->DBName);
+				$this->Con = @pg_connect("host=localhost user=postgres password=test ".$this->DBName); 
 				break;
 			case 'ODBC':
-				//odbc_connect(dsn,user,pass);
 				$this->Con = @odbc_connect("DRIVER={Microsoft Access Driver (*.mdb)};DBQ={$this->DBName};",'','');
 				break;
 			case 'MSSQL':
@@ -48,10 +47,10 @@ class DB_Model
 		}
 	}
 
-	protected function Exec($sql)
+	public function Exec($sql)
 	{
 		if(!$this->Con){ return; }
-		switch ($this->MDB)
+		switch ($this->MDB) 
 		{
 			case 'MySQL':
 				$this->Query = @mysqli_query($this->Con, $sql);
@@ -76,9 +75,9 @@ class DB_Model
 		else{return false;}
 	}
 
-	protected function Fetch()
+	public function Fetch()
 	{
-		switch ($this->MDB)
+		switch ($this->MDB) 
 		{
 			case 'MySQL':
 				$this->Reg = @mysqli_fetch_array($this->Query);
@@ -94,6 +93,37 @@ class DB_Model
 		}
 
 		if($this->Reg){return true;}
+		else{return false;}
+	}
+}
+	private $MDB;
+	private $Query;
+	public $Registro;
+
+	public function Run($var1,$var2)
+	{
+		$this->Query = $var1;
+		$this->MDB = $var2;
+	}
+
+	public function Fetch()
+	{
+		switch ($this->MDB)
+		{
+			case 'MySQL':
+				$this->Registro = @mysqli_fetch_array($this->Query);
+				break;
+			case 'PgSQL':
+				$this->Registro = @pg_fetch_array($this->Query, NULL, PGSQL_BOTH);
+				break;
+			case 'ODBC':
+			case 'MSSQL':
+				$this->Registro = @odbc_fetch_array($this->Query);
+				break;
+			default:break;
+		}
+
+		if($this->Registro){return true;}
 		else{return false;}
 	}
 }

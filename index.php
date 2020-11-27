@@ -38,14 +38,9 @@ if( is_file( "controllers/$controlador.php" ) ){
     $ob = new $controlador();
     $ob->$metodo();
   }else{
-    $titulo___ = 'Error 404';
-    $err___ =  " <p>No existe el manejador: <b>$controlador</b> o el Acceso: <b>$metodo</b> </p>";
-    require_once('views/errors/general.php');
-    exit(1);
+    showErrorHtml('views/errors/general.php', 500, 'Internal Server Error', 'Opps ocurrio un problema en con <b>controlador/acción</b>');
   }
 }else{
-  $titulo___ = 'Error 404';
-  $err___ =  " <p>No se encontro archivo: <b>$controlador</b></p>";
-  require_once('views/errors/general.php');
-  exit(1);
+  showErrorHtml('views/errors/general.php', 500, 'Internal Server Error', 'No se encontro el controlador');
+  
 }

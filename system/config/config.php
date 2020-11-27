@@ -24,4 +24,4 @@ $config['default_controller'] = 'Home';
  * Definimosla direccion index.php
  **/
 $config['index_page'] = 'index.php';
-$config['base_url'] = 'http://localhost:8080/mini-framework/';
+$config['base_url'] = 'https://kllmp.org/';

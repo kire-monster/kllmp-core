@@ -1,31 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
 <head>
 <meta charset="utf-8">
-<title><?php echo isset($titulo___)?$titulo___:null ?></title>
-<style>
-*{
-  margin: 0px;
-  padding: 0px;
-  font-family: Helvetica, Arial, sans-serif;
-}
-body{
-  background-color: #fff;
-}
-.contenedor{
-  padding: 50px
-}
-h2{
-  padding-bottom: 10px
-}
-</style>
+<title>
+<?= isset($code_error)?"$code_error - ":null ?>
+<?= isset($titulo)?$titulo:null ?>
+</title>
 </head>
 <body>
-<div class="contenedor">
-<h2><?php echo isset($titulo___)?$titulo___:null ?></h2>
-<div class="error">
-<?php echo isset($err___)?$err___:null ?>
-</div>
-</div>
+<h1>
+<?= isset($titulo)?$titulo:null ?>
+</h1>
+<p>
+<?= isset($error)?$error:null ?>
+</p>
 </body>
 </html>
