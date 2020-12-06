@@ -1,6 +1,6 @@
 <?php
 
-use Api\Http\REST_Controller;
+use kllmp\Api\Http\REST_Controller;
 
 class Home extends REST_Controller {
 	public function All() {

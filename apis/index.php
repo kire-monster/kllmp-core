@@ -10,7 +10,7 @@ include PATH_FRAMEWORK . '/http/AppServer.php';
 include PATH_FRAMEWORK . '/http/REST_Controller.php';
 
 
-use Api\Http\AppServer;
+use kllmp\Api\Http\AppServer;
 
 $app = new AppServer();
 $app->run(IGNORE_URI);

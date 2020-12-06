@@ -1,4 +1,4 @@
-<?php namespace Api\Http;
+<?php namespace kllmp\Api\Http;
 
 class REST_Controller {
 	public $Method;
