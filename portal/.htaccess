@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  Options -Indexes
+  
+  # vieja configuración
+  #RewriteCond %{REQUEST_FILENAME} !-f
+  #RewriteRule ^(.*)$ %{ENV:BASE}index.php [QSA,L]
+  
+  #Nueva configuracion
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ index.php [L]
+</IfModule>
