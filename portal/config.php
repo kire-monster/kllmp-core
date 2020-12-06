@@ -10,7 +10,7 @@
  * Configuracion del la ruta del framework
  * 
  */
-$config['path_system']='../sys_kllmp';
+$config['path_system']='../.sys_kllmp';
 
 /*
  * zona horaria revisar la lista permitida en la pagina oficial de php
