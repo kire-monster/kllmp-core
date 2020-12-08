@@ -13,4 +13,4 @@ include PATH_FRAMEWORK . '/http/REST_Controller.php';
 use kllmp\Api\Http\AppServer;
 
 $app = new AppServer();
-$app->run(IGNORE_URI);
+$app->run($config['uri_workspace']);

@@ -41,6 +41,6 @@ defined('DEFAULT_CONTROLLER') or define('DEFAULT_CONTROLLER', '');
 defined('DEFAULT_METHOD') or define('DEFAULT_METHOD', '');
 
 /*
- * Ruta a ignorar para el controlador
+ * Nombre del espacio de trabajo
  **/
-defined('IGNORE_URI') or define('IGNORE_URI', '/apis/');
+$config['uri_workspace']='/apis/';
