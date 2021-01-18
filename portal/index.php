@@ -17,4 +17,4 @@ include PATH_FRAMEWORK . '/core_mvc/functions.php';
 
 use kllmp\Core\AppServer_kllmp;
 $app = new AppServer_kllmp();
-$app::Run($config);
+$app->Run($config);
