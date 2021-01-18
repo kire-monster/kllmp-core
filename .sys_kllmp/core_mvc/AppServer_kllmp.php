@@ -48,7 +48,7 @@ class AppServer_kllmp
             if( class_exists($controller) && method_exists($controller, $action))
             {
                 if(!is_subclass_of($controller, 'kllmp\Controllers\kllmp_Controller'))
-                    showErrorHtml($view_error, 500, 'Internal Server Error', '<p>Error controller, Not valid</p>');
+                    showErrorHtml("{$config['foler_views']}/{$config['template_error']}", 500, 'Internal Server Error', '<p>Error controller, Not valid</p>');
 
                 $obj = new $controller();
                 $obj->view_error   = "{$config['foler_views']}/{$config['template_error']}";
