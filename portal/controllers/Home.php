@@ -1,12 +1,10 @@
 <?php
+use kllmp\Http\REST_Controller;
 
-
-use kllmp\Controllers\kllmp_Controller;
-
-class Home extends kllmp_Controller
+class Home extends REST_Controller
 {
-	public function index()
+	public function Index()
 	{
-		self::vista("home.php");
+		$this->View('home');
 	}
 }

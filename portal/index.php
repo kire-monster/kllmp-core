@@ -8,13 +8,6 @@ if(!file_exists('config.php')){
 
 include('config.php');
 
-DEFINED('PATH_FRAMEWORK') OR DEFINE('PATH_FRAMEWORK' , (substr($config['path_system'], -1)!='/')? $config['path_system'] .'/': $config['path_system']);
+DEFINED('PATH_SYSTEM') OR DEFINE('PATH_SYSTEM' , (substr($config['path_system'], -1)!=='/')? $config['path_system'] .'/': $config['path_system']);
 
-include PATH_FRAMEWORK . '/core_mvc/AppServer_kllmp.php';
-include PATH_FRAMEWORK . '/core_mvc/kllmp_Controller.php';
-include PATH_FRAMEWORK . '/core_mvc/functions.php';
-
-
-use kllmp\Core\AppServer_kllmp;
-$app = new AppServer_kllmp();
-$app->Run($config);
+include PATH_SYSTEM . 'init.php';
