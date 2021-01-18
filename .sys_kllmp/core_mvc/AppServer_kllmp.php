@@ -1,6 +1,6 @@
 <?php namespace kllmp\Core;
 
-class AppServer_kllmp 
+class AppServer_kllmp
 {
     private $controller='';
     private $action='hola';
@@ -18,8 +18,11 @@ class AppServer_kllmp
         defined('WORKSPACE') or define('WORKSPACE', $config['uri_workspace']);
 
 
-        //$uri = @explode('/', @str_replace($config['uri_workspace'], '', $_SERVER['PATH_INFO']));
-        $uri = @explode('/', @str_replace($config['uri_workspace'], '', $_SERVER['REQUEST_URI']));
+        // Obtenemos la cadena uri del servidor
+        $str_uri = (substr(@$_SERVER[$config['type_uri']], 0,1) =='/') ? substr(@$_SERVER[$config['type_uri']],1) : @$_SERVER[$config['type_uri']];
+
+        $uri = @explode('/', @str_replace($config['uri_workspace'], '', $str_uri));
+
 
         $controller   = (count($uri)>0 && trim($uri[0]) )? ucfirst($uri[0]):  $config['default_controller'];
         $action       = (count($uri)>1 && trim($uri[1]) )? ucfirst($uri[1]):  $config['default_action'];
@@ -50,13 +53,15 @@ class AppServer_kllmp
                 $obj = new $controller();
                 $obj->view_error   = "{$config['foler_views']}/{$config['template_error']}";
                 $obj->folder_views = $config['foler_views'];
-                
+
+                foreach(@$config['libraries'] as $key => $lib) { @include $lib;}
+
                 call_user_func_array(array($obj, $action), $param);
             }
             else
                 showErrorHtml("{$config['foler_views']}/{$config['template_error']}", 500, 'Internal Server Error', '<p>Error controller/Action</p>');
         }
         else
-            showErrorHtml("{$config['foler_views']}/{$config['template_error']}", 500, 'Internal Server Error', '<p>Error controller not found</p>');		
+            showErrorHtml("{$config['foler_views']}/{$config['template_error']}", 500, 'Internal Server Error', '<p>Error controller not found</p>');
     }
 }
