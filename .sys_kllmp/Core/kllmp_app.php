@@ -40,40 +40,50 @@ class kllmp_app
         $dirCore = dirname(__FILE__) . DIRECTORY_SEPARATOR ;
 
 
-        if(!file_exists( $dirCore . 'REST_Controller.php')){
-          showErrorHtml("{$config['dir_views']}/{$config['template_error']}", 500, 'Internal Server Error', '<p>No se Encontro el archivo'. $dirCore . 'REST_Controller.php</p>');
-        }
-        if(!file_exists( $dirCore . 'showErrorHtml.php')){
-          showErrorHtml("{$config['dir_views']}/{$config['template_error']}", 500, 'Internal Server Error', '<p>No se Encontro el archivo'. $dirCore . 'showErrorHtml.php</p>');
-        }
-        // Cargamos el controlador base
-        include $dirCore . 'REST_Controller.php';
 
-        // Inlcuimos el archivo con la funcion showErrorHtml()
+        // Incluimos los archivos Core del sistema
+        include $dirCore . 'REST_Controller.php';
+        include $dirCore . 'Loader.php';
         include $dirCore . 'showErrorHtml.php';
 
 
-        // Cargamos el controlador dinamico -> Tomado por la URI, si existe
+        /**
+         * Si existe el archivo, incluimos el controlador, 
+         * dir_controller = <Ruta del controller> definido en el archivo config
+         * y el controlador este tomado de la URI
+         */
         if(file_exists("{$config['dir_controller']}/{$controller}.php"))
         {
             include "{$config['dir_controller']}/{$controller}.php";
 
+
+            /**
+             * Si existe la clase con el controlador y el metodo le corresponde
+             * entonces iniciamos el objeto para responder la peticion
+             */
             if( class_exists($controller) && method_exists($controller, $action))
             {
+                // Si el controlador NO hereda de la clase kllmp\Http\REST_Controller Mandara un error 500
                 if(!is_subclass_of($controller, 'kllmp\Http\REST_Controller'))
                     showErrorHtml("{$config['dir_views']}/{$config['template_error']}", 500, 'Internal Server Error', '<p>Error controller, Not valid</p>');
 
                 $obj = new $controller();
                 $obj->loadConfig($config);
 
+                // Incluimos las librerias, si estan definidas en el archivo $config['libraries']
                 foreach(@$config['libraries'] as $key => $lib) { include $lib;}
 
+                // Instanciamos el objeto pasandole los parametros
                 call_user_func_array(array($obj, $action), $param);
             }
             else
+            {
                 showErrorHtml("{$config['dir_views']}/{$config['template_error']}", 500, 'Internal Server Error', '<p>Error controller/Action</p>');
+            }
         }
-        else
+        else 
+        {
             showErrorHtml("{$config['dir_views']}/{$config['template_error']}", 500, 'Internal Server Error', '<p>Error controller not found</p>');
+        }
     }
 }
